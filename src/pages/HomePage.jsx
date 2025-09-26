@@ -1,6 +1,6 @@
 import "./HomePage.css";
 import "./header.css";
-function HomePage() {
+export function HomePage() {
   return (
     <>
       <title>Ecommerce Project</title>
@@ -186,5 +186,3 @@ function HomePage() {
     </>
   );
 }
-
-export default HomePage;
