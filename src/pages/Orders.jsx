@@ -1,5 +1,5 @@
 import "./header.css";
-import "./orders.css";
+import "./Orders.css";
 export function Orders() {
   return (
     <>
