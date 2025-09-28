@@ -1,8 +1,16 @@
 import "../pages/HomePage.css";
-import { products } from "../../ecommerce-project-main/data/products";
 import { Product } from "./Product";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/products").then((response) => {
+      setProducts(response.data);
+    });
+  }, []);
   return (
     <>
       <div className="products-grid">
