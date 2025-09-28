@@ -10,7 +10,7 @@ function App() {
   const [carts, setCarts] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/cart-items").then((response) => {
+    axios.get("/api/cart-items?expand=product").then((response) => {
       setCarts(response.data);
     });
   }, []);

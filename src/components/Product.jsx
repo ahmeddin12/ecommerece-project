@@ -1,4 +1,5 @@
 import "../pages/HomePage.css";
+import { formatMoney } from "../utils/money";
 
 export function Product({ image, name, stars, count, price }) {
   return (
@@ -17,7 +18,7 @@ export function Product({ image, name, stars, count, price }) {
         <div className="product-rating-count link-primary">{count}</div>
       </div>
 
-      <div className="product-price">${(price / 100).toFixed(2)}</div>
+      <div className="product-price">${formatMoney(price)}</div>
 
       <div className="product-quantity-container">
         <select>
