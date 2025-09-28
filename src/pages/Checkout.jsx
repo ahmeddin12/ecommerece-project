@@ -29,7 +29,7 @@ export function Checkout({ carts }) {
               {
                 deliveryOptions.length &&
                   carts.map((cartItem) => {
-                    const selectedDeliveryOption = deliveryOption.find(
+                    const selectedDeliveryOption = deliveryOptions.find(
                       (deliveryOption) => {
                         return deliveryOption.id === cartItem.deliveryOptionId;
                       }
@@ -39,7 +39,12 @@ export function Checkout({ carts }) {
               return (
                 <div className="cart-item-container" key={cartItem.id}>
                   <div className="delivery-date">
-                    Delivery date: Tuesday, June 21
+                    Delivery date:
+                    {dayjs(
+                      deliveryOptions.find((deliveryOption) => {
+                        return deliveryOption.id === cartItem.deliveryOptionId;
+                      }).estimatedDeliveryTimeMs
+                    ).format("dddd, MMMM D")}
                   </div>
 
                   <div className="cart-item-details-grid">
