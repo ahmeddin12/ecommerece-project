@@ -102,6 +102,9 @@
   display: flex;
   justify-content: end;
 }
+.header .orders-link.active {
+  text-decoration: underline;
+}
 
 .header .orders-link {
   color: white;
