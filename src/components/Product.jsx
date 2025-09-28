@@ -1,5 +1,4 @@
-// import "../pages/HomePage.css";
-import PropTypes from "prop-types";
+import "../pages/HomePage.css";
 
 export function Product({ image, name, stars, count, price }) {
   return (
@@ -46,11 +45,3 @@ export function Product({ image, name, stars, count, price }) {
     </div>
   );
 }
-
-Product.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  stars: PropTypes.number.isRequired,
-  count: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-};
