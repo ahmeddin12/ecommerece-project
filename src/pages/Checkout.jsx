@@ -27,7 +27,7 @@ export function Checkout({ carts }) {
           <div className="order-summary">
             {carts.map((cartItem) => {
               {
-                deliveryOptions.length &&
+                deliveryOptions.length > 0 &&
                   carts.map((cartItem) => {
                     const selectedDeliveryOption = deliveryOptions.find(
                       (deliveryOption) => {
