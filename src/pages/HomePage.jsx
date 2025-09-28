@@ -7,7 +7,7 @@ export function HomePage() {
   const [carts, setCarts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/cart-items").then((response) => {
+    axios.get("/api/cart-items").then((response) => {
       setCarts(response.data);
     });
   }, []);
