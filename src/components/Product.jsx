@@ -1,4 +1,4 @@
-import "../pages/HomePage.css";
+import "../pages/home/HomePage.css";
 import { formatMoney } from "../utils/money";
 
 export function Product({ image, name, stars, count, price }) {
