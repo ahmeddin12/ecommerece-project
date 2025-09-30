@@ -3,8 +3,19 @@ import { Fragment } from "react";
 import { Header } from "../../components/Header";
 import { formatMoney } from "../../utils/money";
 import "./OrdersPage.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export function Orders({ carts, orders }) {
+export function Orders({ carts }) {
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrdersData = async () => {
+      let response = await axios.get("/api/orders?expand=products");
+      setOrders(response.data);
+    };
+    fetchOrdersData();
+  });
   return (
     <>
       <title>Orders</title>
