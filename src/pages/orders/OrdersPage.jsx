@@ -1,19 +1,10 @@
-import axios from "axios";
 import dayjs from "dayjs";
-import { useState, useEffect, Fragment } from "react";
+import { Fragment } from "react";
 import { Header } from "../../components/Header";
 import { formatMoney } from "../../utils/money";
 import "./OrdersPage.css";
 
-export function Orders({ carts }) {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
-      setOrders(response.data);
-    });
-  }, []);
-
+export function Orders({ carts, orders }) {
   return (
     <>
       <title>Orders</title>
@@ -58,7 +49,7 @@ export function Orders({ carts }) {
                             {orderProduct.product.name}
                           </div>
                           <div className="product-delivery-date">
-                            Arriving on:{" "}
+                            Arriving on:
                             {dayjs(orderProduct.estimatedDeliveryTimeMs).format(
                               "MMMM D"
                             )}
@@ -78,7 +69,9 @@ export function Orders({ carts }) {
                         </div>
 
                         <div className="product-actions">
-                          <a href="/tracking">
+                          <a
+                            href={`/tracking/${order.id}/${orderProduct.product.id}`}
+                          >
                             <button className="track-package-button button-secondary">
                               Track package
                             </button>
