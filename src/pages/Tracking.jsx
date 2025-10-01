@@ -29,7 +29,20 @@ export function Tracking({ carts }) {
           <Link className="back-to-orders-link link-primary" to="/orders">
             View all orders
           </Link>
+
           {order.products.map((product) => {
+            const totalDeliveryTime =
+              product.estimatedDeliveryTimeMs - order.orderTimeMs;
+            const timePassMs = dayjs().valueOf() - order.orderTimeMs;
+            let percentage = (timePassMs / totalDeliveryTime) * 100;
+            percentage = percentage > 100 ? 100 : percentage;
+            const status =
+              percentage < 33
+                ? "isPreparing"
+                : percentage > 33 && percentage < 100
+                ? "isShipped"
+                : "isDelivered";
+            console.log(totalDeliveryTime, timePassMs, percentage, status);
             return (
               <>
                 <div className="delivery-date" key={product.productID}>
@@ -44,13 +57,34 @@ export function Tracking({ carts }) {
                 <img className="product-image" src={product.product.image} />
 
                 <div className="progress-labels-container">
-                  <div className="progress-label">Preparing</div>
-                  <div className="progress-label current-status">Shipped</div>
-                  <div className="progress-label">Delivered</div>
+                  <div
+                    className={`progress-label ${
+                      status === "isPreparing" ? "current-status" : ""
+                    }`}
+                  >
+                    Preparing
+                  </div>
+                  <div
+                    className={`progress-label ${
+                      status === "isShipped" ? "current-status" : ""
+                    }`}
+                  >
+                    Shipped
+                  </div>
+                  <div
+                    className={`progress-label ${
+                      status === "isDelivered" ? "current-status" : ""
+                    }`}
+                  >
+                    Delivered
+                  </div>
                 </div>
 
                 <div className="progress-bar-container">
-                  <div className="progress-bar"></div>
+                  <div
+                    className="progress-bar"
+                    style={{ width: `${percentage}%` }}
+                  ></div>
                 </div>
               </>
             );
