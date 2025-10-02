@@ -3,26 +3,22 @@ import { Product } from "./Product";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export function Products() {
+export function Products({ loadCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/products").then((response) => {
-      setProducts(response.data);
-    });
+    const fetchResponse = async () => {
+      axios.get("/api/products").then((response) => {
+        setProducts(response.data);
+      });
+    };
+    fetchResponse();
   }, []);
   return (
     <>
       <div className="products-grid">
         {products.map((product) => (
-          <Product
-            image={product.image}
-            name={product.name}
-            stars={product.rating.stars}
-            count={product.rating.count}
-            price={product.priceCents}
-            key={product.id}
-          />
+          <Product product={product} key={product.id} loadCart={loadCart} />
         ))}
       </div>
     </>

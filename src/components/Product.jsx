@@ -1,27 +1,46 @@
 import "../pages/home/HomePage.css";
+import axios from "axios";
 import { formatMoney } from "../utils/money";
+import { useState } from "react";
 
-export function Product({ image, name, stars, count, price }) {
+export function Product({ product, loadCart }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const addToCart = async () => {
+    await axios.post("/api/cart-items", {
+      productId: product.id,
+      quantity,
+    });
+    await loadCart();
+  };
+
+  const selectQuantity = (event) => {
+    const quantitySelected = Number(event.target.value);
+    setQuantity(quantitySelected);
+  };
+
   return (
-    <div className="product-container">
+    <div className="product-container" key={product.id}>
       <div className="product-image-container">
-        <img className="product-image" src={image} />
+        <img className="product-image" src={product.image} />
       </div>
 
-      <div className="product-name limit-text-to-2-lines">{name}</div>
+      <div className="product-name limit-text-to-2-lines">{product.name}</div>
 
       <div className="product-rating-container">
         <img
           className="product-rating-stars"
-          src={`images/ratings/rating-${stars * 10}.png`}
+          src={`images/ratings/rating-${product.rating.stars * 10}.png`}
         />
-        <div className="product-rating-count link-primary">{count}</div>
+        <div className="product-rating-count link-primary">
+          {product.rating.count}
+        </div>
       </div>
 
-      <div className="product-price">${formatMoney(price)}</div>
+      <div className="product-price">{formatMoney(product.priceCents)}</div>
 
       <div className="product-quantity-container">
-        <select>
+        <select value={quantity} onChange={selectQuantity}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -42,7 +61,9 @@ export function Product({ image, name, stars, count, price }) {
         Added
       </div>
 
-      <button className="add-to-cart-button button-primary">Add to Cart</button>
+      <button className="add-to-cart-button button-primary" onClick={addToCart}>
+        Add to Cart
+      </button>
     </div>
   );
 }
