@@ -5,12 +5,17 @@ import { useState } from "react";
 
 export function Product({ product, loadCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   const addToCart = async () => {
     await axios.post("/api/cart-items", {
       productId: product.id,
       quantity,
     });
+
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
+
     await loadCart();
   };
 
@@ -56,13 +61,25 @@ export function Product({ product, loadCart }) {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
-        <img src="images/icons/checkmark.png" />
-        Added
-      </div>
-
-      <button className="add-to-cart-button button-primary" onClick={addToCart}>
-        Add to Cart
+      <button
+        className={`add-to-cart-button button-primary ${
+          isAdded ? "added" : ""
+        }`}
+        onClick={addToCart}
+        disabled={isAdded}
+      >
+        {isAdded ? (
+          <>
+            <img
+              src="images/icons/checkmark.png"
+              alt="added"
+              className="checkmark-icon"
+            />
+            <span>Added</span>
+          </>
+        ) : (
+          "Add to Cart"
+        )}
       </button>
     </div>
   );

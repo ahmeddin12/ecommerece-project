@@ -148,8 +148,36 @@
 }
 
 .add-to-cart-button {
-  width: 100%;
-  padding: 8px;
-  height: 34px;
-  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* space between checkmark and text */
+  font-size: 14px;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button img.checkmark-icon {
+  width: 16px; /* smaller size */
+  height: 16px; /* keep square */
+}
+
+.added-to-cart {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: green;
+  font-weight: bold;
+  margin-top: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.added-to-cart.fade-in {
+  opacity: 1;
+}
+
+.add-to-cart-button.added {
+  background-color: rgb(25, 135, 84);
+  color: white;
 }
