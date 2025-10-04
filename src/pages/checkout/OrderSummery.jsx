@@ -1,6 +1,7 @@
 import { DeliveryDate } from "./DeliveryDate";
 import { DeliveryOptions } from "./DeliveryOptions";
 import { CartItemDetails } from "./CartItemDetails";
+import axios from "axios";
 
 export function OrderSummery({ cart, deliveryOptions, loadCart }) {
   return (
@@ -13,12 +14,20 @@ export function OrderSummery({ cart, deliveryOptions, loadCart }) {
             }
           );
 
+          const deleteCartItem = async () => {
+            await axios.delete(`/api/cart-items/${cartItem.productId}`);
+            await loadCart();
+          };
+
           return (
             <div key={cartItem.productId} className="cart-item-container">
               <DeliveryDate selectedDeliveryOption={selectedDeliveryOption} />
 
               <div className="cart-item-details-grid">
-                <CartItemDetails cartItem={cartItem} />
+                <CartItemDetails
+                  cartItem={cartItem}
+                  deleteCartItem={deleteCartItem}
+                />
 
                 <DeliveryOptions
                   cartItem={cartItem}
