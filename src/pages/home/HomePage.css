@@ -178,6 +178,6 @@
 }
 
 .add-to-cart-button.added {
-  background-color: rgb(25, 135, 84);
+  background-color: #4caf50; /* green */
   color: white;
 }

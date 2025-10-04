@@ -2,11 +2,11 @@ import { DeliveryDate } from "./DeliveryDate";
 import { DeliveryOptions } from "./DeliveryOptions";
 import { CartItemDetails } from "./CartItemDetails";
 
-export function OrderSummary({ carts, deliveryOptions }) {
+export function OrderSummery({ cart, deliveryOptions, loadCart }) {
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 &&
-        carts.map((cartItem) => {
+        cart.map((cartItem) => {
           const selectedDeliveryOption = deliveryOptions.find(
             (deliveryOption) => {
               return deliveryOption.id === cartItem.deliveryOptionId;
@@ -23,6 +23,7 @@ export function OrderSummary({ carts, deliveryOptions }) {
                 <DeliveryOptions
                   cartItem={cartItem}
                   deliveryOptions={deliveryOptions}
+                  loadCart={loadCart}
                 />
               </div>
             </div>

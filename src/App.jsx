@@ -8,10 +8,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  const [carts, setCarts] = useState([]);
+  const [cart, setCart] = useState([]);
   const loadCart = async () => {
     const response = await axios.get("/api/cart-items?expand=product");
-    setCarts(response.data);
+    setCart(response.data);
   };
 
   useEffect(() => {
@@ -21,12 +21,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route index element={<HomePage carts={carts} loadCart={loadCart} />} />
-        <Route path="/checkout" element={<Checkout carts={carts} />} />
-        <Route path="/orders" element={<Orders carts={carts} />} />
+        <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+        <Route
+          path="/checkout"
+          element={<Checkout cart={cart} loadCart={loadCart} />}
+        />
+        <Route path="/orders" element={<Orders cart={cart} />} />
         <Route
           path="/tracking/:orderId/:productId"
-          element={<Tracking carts={carts} />}
+          element={<Tracking cart={cart} />}
         />
       </Routes>
     </>
