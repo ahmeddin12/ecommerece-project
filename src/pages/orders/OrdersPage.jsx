@@ -6,7 +6,7 @@ import "./OrdersPage.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function Orders({ carts }) {
+export function Orders({ cart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -16,11 +16,12 @@ export function Orders({ carts }) {
     };
     fetchOrdersData();
   });
+
   return (
     <>
       <title>Orders</title>
 
-      <Header carts={carts} />
+      <Header cart={cart} />
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>

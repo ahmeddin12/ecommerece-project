@@ -1,12 +1,16 @@
 import "../pages/home/HomePage.css";
-import axios from "axios";
+
 import { formatMoney } from "../utils/money";
+import axios from "axios";
 import { useState } from "react";
 
 export function Product({ product, loadCart }) {
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
-
+  const selectQuantity = (event) => {
+    const quantitySelected = Number(event.target.value);
+    setQuantity(quantitySelected);
+  };
   const addToCart = async () => {
     await axios.post("/api/cart-items", {
       productId: product.id,
@@ -17,11 +21,6 @@ export function Product({ product, loadCart }) {
     setTimeout(() => setIsAdded(false), 2000);
 
     await loadCart();
-  };
-
-  const selectQuantity = (event) => {
-    const quantitySelected = Number(event.target.value);
-    setQuantity(quantitySelected);
   };
 
   return (
