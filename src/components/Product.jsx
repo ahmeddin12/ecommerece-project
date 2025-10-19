@@ -38,7 +38,7 @@ export function Product({ product, loadCart }) {
       <div className="product-rating-container">
         <img
           className="product-rating-stars"
-          data-testid="product-image"
+          data-testid="product-rating-stars-image"
           src={`images/ratings/rating-${product.rating.stars * 10}.png`}
         />
         <div className="product-rating-count link-primary">
@@ -71,12 +71,12 @@ export function Product({ product, loadCart }) {
         }`}
         onClick={addToCart}
         disabled={isAdded}
+        data-testid="add-to-cart-button"
       >
         {isAdded ? (
           <>
             <img
               src="images/icons/checkmark.png"
-              data-testid="add-to-cart-button"
               alt="added"
               className="checkmark-icon"
             />
