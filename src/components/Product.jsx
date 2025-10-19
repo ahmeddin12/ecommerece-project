@@ -76,6 +76,7 @@ export function Product({ product, loadCart }) {
           <>
             <img
               src="images/icons/checkmark.png"
+              data-testid="add-to-cart-button"
               alt="added"
               className="checkmark-icon"
             />

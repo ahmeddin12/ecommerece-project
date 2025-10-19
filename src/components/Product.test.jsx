@@ -47,4 +47,17 @@ describe("Product component", () => {
 
     expect(screen.getByText("87")).toBeInTheDocument();
   });
+  it("adds a product to the cart", async () => {
+    render(<Product product={product} loadCart={loadCart} />);
+
+    const user = userEvent.setup();
+    const addToCartButton = screen.getByTestId("add-to-cart-button");
+    await user.click(addToCartButton);
+
+    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 1,
+    });
+    expect(loadCart).toHaveBeenCalled();
+  });
 });
